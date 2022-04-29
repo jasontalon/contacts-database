@@ -37,3 +37,9 @@
 * Use ASP.NET Identity for the OIDC flow
 * Use dotnet 6 (C#) for the REST API
 * Use Angular >= 13 for the frontend.
+
+## Developer notes
+### Solution References
+* https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-6.0
+* https://docs.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-6.0&tabs=netcore-cli
+* https://docs.microsoft.com/en-us/aspnet/core/security/gdpr?view=aspnetcore-3.1
