@@ -4,8 +4,16 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
 using api.Models;
+using api.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+// var connectionString = builder.Configuration.GetConnectionString("apiIdentityDbContextConnection");;
+//
+// builder.Services.AddDbContext<apiIdentityDbContext>(options =>
+//     options.UseSqlite(connectionString));;
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<apiIdentityDbContext>();;
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
