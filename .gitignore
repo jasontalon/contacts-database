@@ -239,4 +239,4 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 **/app.db**
-app.db
+**/*.db
