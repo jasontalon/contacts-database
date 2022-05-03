@@ -1,19 +1,6 @@
 {
-	"name": "contacts-database",
-	"version": "0.0.1",
 	"scripts": {
 		"test": "echo ${foo}",
-    "up": "docker-compose up -d"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/jasontalon/contacts-database.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/jasontalon/contacts-database/issues"
-	},
-	"homepage": "https://github.com/jasontalon/contacts-database#readme"
+		"up": "docker-compose up -d"
+	}
 }
