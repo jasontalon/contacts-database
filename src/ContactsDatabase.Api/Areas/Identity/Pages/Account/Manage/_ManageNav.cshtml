@@ -1,4 +1,4 @@
-@using ContactsDatabase.Api.Models
+@using ContactsDatabase.Infrastructure.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
-using ContactsDatabase.Api.Data;
-using ContactsDatabase.Api.Models;
+
+using ContactsDatabase.Infrastructure.Identity;
+using ContactsDatabase.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
