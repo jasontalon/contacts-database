@@ -2,7 +2,7 @@ using ContactsDatabase.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-if (builder.Configuration.IsDevelopment())
+if (builder.Environment.IsDevelopment())
     builder.Configuration.LoadDotEnv();
 
 builder.Services.AddInfrastructure(builder.Configuration);

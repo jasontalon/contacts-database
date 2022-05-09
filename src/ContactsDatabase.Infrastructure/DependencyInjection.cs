@@ -26,15 +26,10 @@ public static class DependencyInjection
 
         serviceCollection.AddAuthentication()
             .AddIdentityServerJwt();
-
-
+        
         return serviceCollection;
     }
-
-    public static bool IsDevelopment(this ConfigurationManager configuration) =>  
-        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")?
-        .Equals("Development", StringComparison.InvariantCultureIgnoreCase) ?? false;
-
+    
     public static IConfiguration LoadDotEnv(this ConfigurationManager configuration)
     {
         var path = Path.Combine(".env");
