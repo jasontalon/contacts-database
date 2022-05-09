@@ -30,7 +30,7 @@ public static class DependencyInjection
         return serviceCollection;
     }
     
-    public static IConfiguration LoadDotEnv(this ConfigurationManager configuration)
+    public static void LoadDotEnv(this ConfigurationManager configuration)
     {
         var path = Path.Combine(".env");
 
@@ -58,7 +58,5 @@ public static class DependencyInjection
             Environment.SetEnvironmentVariable(environmentVariable.Key, environmentVariable.Value);
         
         configuration.AddEnvironmentVariables();
-        
-        return configuration;
     }
 }
