@@ -54,8 +54,8 @@ public static class DependencyInjection
                 return value;
             });
 
-        foreach (var environmentVariable in environmentVariables)
-            Environment.SetEnvironmentVariable(environmentVariable.Key, environmentVariable.Value);
+        foreach (var (key, value) in environmentVariables)
+            Environment.SetEnvironmentVariable(key, value);
         
         configuration.AddEnvironmentVariables();
     }
