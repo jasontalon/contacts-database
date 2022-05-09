@@ -4,7 +4,7 @@ src/api/.idea/
 .idea/
 
 **/appsettings**.json
-**/Properties
+!**/Properties/launchSettings.json
 
 
 ## Ignore Visual Studio temporary files, build results, and
