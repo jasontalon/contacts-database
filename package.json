@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"test": "echo ${foo}",
+		"test": "echo hello $npm_config_first!",
 		"up": "docker-compose up -d"
 	}
 }

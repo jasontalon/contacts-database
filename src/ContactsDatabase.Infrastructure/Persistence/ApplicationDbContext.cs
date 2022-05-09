@@ -18,4 +18,5 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<ContactPhone> ContactPhones { get; }
     public DbSet<ContactList> ContactLists { get; }
     public DbSet<List> Lists { get; }
+    public DbSet<Phone> Phones { get; set; }
 }

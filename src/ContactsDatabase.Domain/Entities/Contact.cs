@@ -15,31 +15,6 @@ public class Contact : Auditable
     public string Country { get; set; }
     public string Notes { get; set; }
     public string Website { get; set; }
-    public virtual ICollection<ContactPhone> Phones { get; set; }
-    public virtual ICollection<ContactList> Lists { get; set; }
-}
-
-public class ContactPhone : Auditable
-{
-    public Guid ContactId { get; set; }
-    public bool IsPrimary { get; set; }
-    public string Type { get; set; }
-    public string Phone { get; set; }
-    public virtual Contact Contact { get; set; }
-}
-
-public class ContactList : Auditable
-{
-    public Guid ContactId { get; set; }
-    public Guid ListId { get; set; }
-    public virtual Contact Contact { get; set; }
-    public virtual List List { get; set; }
-}
-
-public class List : Auditable
-{
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public virtual ICollection<ContactList> Contacts { get; set; }
+    public ICollection<ContactPhone> Phones { get; set; }
+    public ICollection<ContactList> Lists { get; set; }
 }

@@ -7,11 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.4" />
+        <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.4"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.4" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ContactsDatabase.Application\ContactsDatabase.Application.csproj" />
+        <ProjectReference Include="..\ContactsDatabase.Application\ContactsDatabase.Application.csproj"/>
     </ItemGroup>
 
 </Project>
