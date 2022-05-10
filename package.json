@@ -1,5 +1,6 @@
 {
 	"scripts": {
+		"api/run": "dotenv -e ./src/ContactsDatabase.Api/.env -- dotnet run --project=\"./src/ContactsDatabase.Api\"",
 		"migration/add/help": "echo 'npm run migration/add --migration_name=\"name_of_your_migration_here\"'",
 		"migration/add": "dotenv -e ./src/ContactsDatabase.Api/.env -- bash -c 'dotnet ef migrations add $npm_config_migration_name --project src/ContactsDatabase.Infrastructure -- \"$ConnectionStrings__DefaultConnection\"'",
 		"migration/restart": "rimraf src/ContactsDatabase.Infrastructure/Migrations && npm run migration/add --migration_name=InitialCreate",
@@ -8,7 +9,11 @@
 		"up": "docker-compose up --build --force-recreate -d",
 		"down": "docker-compose down",
 		"recreate": "npm run down && npm run up",
-		"purge": "docker-compose down --rmi all"
+		"purge": "docker-compose down --rmi all",
+		"db/cmd": "docker exec -it contacts-database-db-1 bash -c 'psql -U postgres --no-password -c \"$npm_config_command\"'",
+		"db/drop": "npm run db/drop-connections || npm run db/drop-database",
+		"db/drop-connections": "docker exec -it contacts-database-db-1 bash -c 'psql -U postgres --no-password -c \"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'contacts' AND pid <> pg_backend_pid();\"'",
+		"db/drop-database": "docker exec -it contacts-database-db-1 bash -c 'psql -U postgres --no-password -c \"DROP DATABASE contacts;\"'"
 	},
 	"devDependencies": {
 		"dotenv-cli": "^5.1.0",
