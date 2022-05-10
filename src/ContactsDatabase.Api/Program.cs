@@ -1,4 +1,6 @@
 using ContactsDatabase.Infrastructure;
+using ContactsDatabase.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,5 +53,11 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html");;
+
+using (var scope  = app.Services.CreateScope())
+{
+    var connectDataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    connectDataContext.Database.Migrate();
+}
 
 app.Run();
