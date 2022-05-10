@@ -19,4 +19,15 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<ContactList> ContactLists { get; }
     public DbSet<List> Lists { get; }
     public DbSet<Phone> Phones { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.HasPostgresExtension("uuid-ossp");
+        
+        base.OnModelCreating(builder);
+
+        builder.Entity<ContactList>().HasKey(p => new { p.ContactId, p.ListId });
+        
+        builder.Entity<ContactPhone>().HasKey(p => new { p.ContactId, p.PhoneId });
+    }
 }
