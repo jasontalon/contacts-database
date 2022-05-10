@@ -37,6 +37,9 @@ public static class DependencyInjection
         for (var level = 0; level <= 3 && !File.Exists(path); level++)
             path = Path.Combine("../", path);
 
+        if (!File.Exists(path))
+            return;
+        
         var variables = File.ReadAllLines(path)
             .Where(p => !string.IsNullOrWhiteSpace(p))
             .Where(p => p.Contains("="))
