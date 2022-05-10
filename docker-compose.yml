@@ -1,11 +1,8 @@
 version: '3'
 services:
   db:
-    image: postgres:14-alpine
-    restart: always
-    volumes:
-    - ./.db/data:/var/lib/postgresql/data
-    - ./.db/backups:/backups
+    image: postgres:14-bullseye
+    restart: always    
     ports:
     - "5432:5432"
     environment:
