@@ -1,6 +1,12 @@
 {
 	"scripts": {
-		"test": "echo hello $npm_config_first!",
+		"migration/add/help": "echo 'npm run migration/add --migration_name=\"name_of_your_migration_here\"'",
+		"migration/add": "dotenv -e ./src/ContactsDatabase.Api/.env -- bash -c 'dotnet ef migrations add $npm_config_migration_name --project src/ContactsDatabase.Infrastructure -- \"$ConnectionStrings__DefaultConnection\"'",
+		"arg/help": "echo 'npm run arg --name=\"jason talon\"'",
+		"arg": "echo hello $npm_config_name!",
 		"up": "docker-compose up -d"
+	},
+	"devDependencies": {
+		"dotenv-cli": "^5.1.0"
 	}
 }
