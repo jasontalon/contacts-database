@@ -1,4 +1,4 @@
-const {argv: args} = process
+const {argv: args, exit} = process
     , {readdir} = require('fs/promises')
     , path = require('path');
 
@@ -9,7 +9,7 @@ const {argv: args} = process
 
     if (args.length <= 2) {
         console.error('Expects at least one argument')
-        process.exit(1)
+        exit(1)
         return
     }
 
@@ -17,9 +17,16 @@ const {argv: args} = process
 
     if (!commands.includes(command)) {
         console.error(`Expects valid commands: ${commands.join(", ")}`)
-        process.exit(1)
+        exit(1)
         return
     }
 
-    require(`./utils/${command}`)(args)
+    try {
+        const result = await require(`./utils/${command}`)(args)
+        if (!!result)
+            console.log(result)
+    } catch (err) {
+        console.error(err)
+        exit(1)
+    }
 })()
