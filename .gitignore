@@ -242,3 +242,5 @@ _Pvt_Extensions
 **/*.db
 
 **/**.env
+
+**/.DS_Store
