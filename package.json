@@ -1,5 +1,4 @@
 {
-	"main": "main.js",
 	"scripts": {
 		"api/run": "dotenv -e ./src/ContactsDatabase.Api/.env -- dotnet run --project=\"./src/ContactsDatabase.Api\"",
 		"migration/add/help": "echo 'npm run migration/add --migration_name=\"name_of_your_migration_here\"'",
@@ -12,8 +11,8 @@
 		"docker/recreate": "npm run down && npm run up",
 		"purge": "docker-compose down --rmi all",
 		"db/drop": "npm run db/drop-connections && npm run db/drop-database",
-		"db/drop-connections": "node . db --command=\"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'contacts' AND pid <> pg_backend_pid();\"",
-		"db/drop-database": "node . db --command \"DROP DATABASE contacts;\""
+		"db/drop-connections": "node . psql --command=\"SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'contacts' AND pid <> pg_backend_pid();\"",
+		"db/drop-database": "node . psql --command \"DROP DATABASE contacts;\""
 	},
 	"devDependencies": {
 		"dotenv-cli": "^5.1.0",
