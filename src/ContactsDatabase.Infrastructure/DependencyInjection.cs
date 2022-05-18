@@ -1,5 +1,7 @@
+using ContactsDatabase.Application.Interfaces;
 using ContactsDatabase.Infrastructure.Identity;
 using ContactsDatabase.Infrastructure.Persistence;
+using ContactsDatabase.Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,12 +14,14 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection,
         IConfiguration configuration)
     {
-        serviceCollection.AddDbContext<ApplicationDbContext>(options =>
+        serviceCollection.AddScoped<IUserContext, UserContext>();
+
+        serviceCollection.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                 builder => { builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName); });
         });
-        
+
         serviceCollection.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -26,10 +30,10 @@ public static class DependencyInjection
 
         serviceCollection.AddAuthentication()
             .AddIdentityServerJwt();
-        
+
         return serviceCollection;
     }
-    
+
     public static void LoadDotEnv(this ConfigurationManager configuration)
     {
         var path = Path.Combine(".env");
@@ -39,7 +43,7 @@ public static class DependencyInjection
 
         if (!File.Exists(path))
             return;
-        
+
         var variables = File.ReadAllLines(path)
             .Where(p => !string.IsNullOrWhiteSpace(p))
             .Where(p => p.Contains("="))
@@ -59,7 +63,7 @@ public static class DependencyInjection
 
         foreach (var (key, value) in environmentVariables)
             Environment.SetEnvironmentVariable(key, value);
-        
+
         configuration.AddEnvironmentVariables();
     }
 }

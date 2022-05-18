@@ -12,9 +12,10 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions) :
         base(options, operationalStoreOptions)
     {
+        
     }
 
-    public DbSet<Contact> Contacts { get; }
+    public DbSet<Contact> Contacts { get; set; }
     //public DbSet<ContactPhone> ContactPhones { get; }
     //public DbSet<ContactList> ContactLists { get; }
     //public DbSet<List> Lists { get; }
