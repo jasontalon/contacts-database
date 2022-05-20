@@ -1,4 +1,5 @@
 using ContactsDatabase.Application.Handlers.Commands;
+using ContactsDatabase.Application.Handlers.Queries.Contacts;
 using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,10 @@ public class ContactsController : ControllerBase
 
     public ContactsController(IMediator mediator) => _mediator = mediator;
 
+    [HttpGet("{id}")]
+    public Task<GetContactByIdQueryResponse> GetContactById(Guid id) =>
+        _mediator.Send(new GetContactByIdQuery {Id = id});
+    
     [HttpPost]
     public Task<Guid> CreateContact(CreateContactCommand command) => _mediator.Send(command);
 
