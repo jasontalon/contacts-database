@@ -1,8 +1,20 @@
 using AutoMapper;
+using ContactsDatabase.Application.Common;
+using ContactsDatabase.Application.Handlers.Queries.Contacts;
 using ContactsDatabase.Application.Interfaces;
 using MediatR;
 
 namespace ContactsDatabase.Application.Handlers;
+
+public abstract class
+    PagedRequestHandlerBase<TRequest, TResponse> : RequestHandlerBase<TRequest, PagedResponse<TResponse>>
+    where TRequest : IRequest<PagedResponse<TResponse>>
+{
+    protected PagedRequestHandlerBase(IApplicationDbContext connectDataContext, IMapper mapper,
+        IUserContext userContext) : base(connectDataContext, mapper, userContext)
+    {
+    }
+}
 
 public abstract class RequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
