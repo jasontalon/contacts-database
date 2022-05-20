@@ -19,4 +19,7 @@ public class ContactsController : ControllerBase
     [HttpPatch("{id}")]
     public Task UpdateContact(Guid id, [FromBody] JsonPatchDocument<UpdateContactDto> patch) =>
         _mediator.Send(new UpdateContactCommand {Id = id, Patch = patch});
+
+    [HttpDelete("{id}")]
+    public Task DeleteContact(Guid id) => _mediator.Send(new DeleteContactCommand {Id = id});
 }
