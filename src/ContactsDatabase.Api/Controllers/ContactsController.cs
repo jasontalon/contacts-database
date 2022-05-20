@@ -1,5 +1,6 @@
-using ContactsDatabase.Application.Handlers.Commands.Contact;
+using ContactsDatabase.Application.Handlers.Commands;
 using MediatR;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactsDatabase.Api.Controllers;
@@ -14,4 +15,8 @@ public class ContactsController : ControllerBase
 
     [HttpPost]
     public Task<Guid> CreateContact(CreateContactCommand command) => _mediator.Send(command);
+
+    [HttpPatch("{id}")]
+    public Task UpdateContact(Guid id, [FromBody] JsonPatchDocument<UpdateContactDto> patch) =>
+        _mediator.Send(new UpdateContactCommand {Id = id, Patch = patch});
 }

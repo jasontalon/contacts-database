@@ -1,10 +1,11 @@
 using AutoMapper;
 using ContactsDatabase.Application.Interfaces;
+using ContactsDatabase.Domain.Entities;
 using MediatR;
 
-namespace ContactsDatabase.Application.Handlers.Commands.Contact;
+namespace ContactsDatabase.Application.Handlers.Commands;
 
-public class CreateContactCommandHandler : BaseCommandHandler<CreateContactCommand, Guid>
+public class CreateContactCommandHandler : RequestHandlerBase<CreateContactCommand, Guid>
 {
     public CreateContactCommandHandler(IApplicationDbContext connectDataContext, IMapper mapper,
         IUserContext userContext) : base(connectDataContext, mapper, userContext)
@@ -13,7 +14,7 @@ public class CreateContactCommandHandler : BaseCommandHandler<CreateContactComma
 
     public override async Task<Guid> Handle(CreateContactCommand request, CancellationToken cancellationToken)
     {
-        var contact = Mapper.Map<CreateContactCommand, Domain.Entities.Contact>(request);
+        var contact = Mapper.Map<CreateContactCommand, Contact>(request);
 
         applicationDbContext.Contacts.Add(contact);
 
@@ -23,6 +24,7 @@ public class CreateContactCommandHandler : BaseCommandHandler<CreateContactComma
     }
 }
 
+[AutoMap(typeof(Contact))]
 public class CreateContactCommand : IRequest<Guid>
 {
     public string? Firstname { get; set; }
@@ -37,9 +39,4 @@ public class CreateContactCommand : IRequest<Guid>
     public string? Country { get; set; }
     public string? Notes { get; set; }
     public string? Website { get; set; }
-}
-
-public class CreateContactCommandProfile : Profile
-{
-    public CreateContactCommandProfile() => CreateMap<CreateContactCommand, Domain.Entities.Contact>();
 }

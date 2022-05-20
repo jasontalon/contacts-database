@@ -29,8 +29,10 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddRazorPages();
 
+builder.Services.AddSwaggerGenNewtonsoftSupport();
 builder.Services.AddSwaggerGen(c =>
 {
+    
     c.SwaggerDoc("v1", new OpenApiInfo {Title = "connect-api", Version = "v1"});
     c.AddSecurityDefinition("Bearer",
         new OpenApiSecurityScheme
